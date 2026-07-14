@@ -302,6 +302,42 @@ footer.site a:hover{color:#fff}
 .case-back{color:var(--muted);font-weight:600;font-size:14.5px}
 .case-back:hover{color:var(--blue)}
 
+/* Live site-preview (echte site in browser-frame, geschaald) */
+.site-frame{background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 24px 70px rgba(14,27,61,.18);width:100%}
+.site-frame-bar{display:flex;gap:7px;padding:12px 16px;border-bottom:1px solid var(--line);align-items:center;background:#fff}
+.site-frame-url{margin-left:10px;background:var(--bg);border-radius:8px;font-size:12.5px;color:var(--muted);padding:6px 14px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.site-frame-body{position:relative;width:100%;overflow:hidden}
+.site-frame-iframe{position:absolute;top:0;left:0;border:0;transform-origin:top left;background:#fff}
+.site-frame-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:clamp(20px,4vw,34px)}
+.preview-note{text-align:center;color:var(--muted);font-size:14px;margin-top:18px}
+.preview-note a{color:var(--blue);font-weight:700;display:inline-flex;align-items:center;gap:5px}
+
+/* Uitgelichte case */
+.case-featured{display:grid;grid-template-columns:1.35fr 1fr;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#fff;box-shadow:var(--shadow);transition:transform .25s ease,box-shadow .25s ease}
+.case-featured:hover{transform:translateY(-4px);box-shadow:0 22px 60px rgba(14,27,61,.16)}
+.case-featured-preview{padding:34px;background:var(--bg);display:flex;align-items:center}
+.case-featured-info{padding:46px 44px;display:flex;flex-direction:column;justify-content:center;color:#fff}
+.case-featured-tag{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;background:rgba(255,255,255,.18);color:#fff;font-weight:700;font-size:13px;padding:7px 14px;border-radius:99px;margin-bottom:18px}
+.case-featured-info h2{color:#fff;font-size:clamp(26px,3.4vw,34px);margin-bottom:8px}
+.case-featured-sector{color:rgba(255,255,255,.82);font-size:15px;font-weight:600;margin-bottom:16px}
+.case-featured-kort{color:rgba(255,255,255,.92);font-size:16.5px;line-height:1.6;margin-bottom:28px}
+.case-featured-cta{display:inline-flex;align-items:center;gap:9px;font-weight:800;font-size:16px;color:#fff;transition:gap .2s ease}
+.case-featured:hover .case-featured-cta{gap:14px}
+
+/* Overige projecten / binnenkort-cards */
+.portfolio-more{text-align:center;margin:76px 0 8px}
+.portfolio-more h2{margin-bottom:10px}
+.portfolio-more .sub{margin:0 auto}
+.soon-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px}
+.soon-card{position:relative;border-radius:18px;overflow:hidden;min-height:280px;display:flex;flex-direction:column;justify-content:flex-end;padding:26px;color:#fff;box-shadow:var(--shadow)}
+.soon-card::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 0%,rgba(255,255,255,.16),transparent 60%);pointer-events:none}
+.soon-badge{position:absolute;top:18px;left:18px;background:rgba(255,255,255,.2);backdrop-filter:blur(4px);color:#fff;font-weight:700;font-size:12px;padding:6px 13px;border-radius:99px;letter-spacing:.03em}
+.soon-browser{position:absolute;top:52px;left:18px;right:18px;height:96px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:12px;display:flex;gap:6px;padding:12px}
+.soon-browser .dot{background:rgba(255,255,255,.55)}
+.soon-meta{position:relative;z-index:1}
+.soon-meta h3{color:#fff;font-size:18px;margin-bottom:4px}
+.soon-meta p{color:rgba(255,255,255,.85);font-size:14.5px}
+
 /* Blog */
 .blog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
 .blog-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
@@ -404,6 +440,10 @@ a,button{-webkit-tap-highlight-color:transparent}
   .contact-form{padding:26px}
   .case-grid{grid-template-columns:1fr;gap:32px}
   .case-side{position:static}
+  .case-featured{grid-template-columns:1fr}
+  .case-featured-preview{padding:24px 24px 0}
+  .case-featured-info{padding:32px 28px}
+  .soon-grid{grid-template-columns:1fr 1fr;gap:18px}
   .blog-grid{grid-template-columns:1fr}
   .addon-grid{grid-template-columns:1fr}
   .checkout-grid{grid-template-columns:1fr;gap:32px}
@@ -414,4 +454,8 @@ a,button{-webkit-tap-highlight-color:transparent}
   .nav-links.open{display:flex}
   .hamburger{display:block}
   section{padding:64px 0}
+}
+
+@media (max-width:560px){
+  .soon-grid{grid-template-columns:1fr}
 }

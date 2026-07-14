@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
-import { projecten } from "@/lib/projecten";
-import { ArrowRight } from "@/components/icons";
+import SitePreview from "@/components/SitePreview";
+import { projecten, echteCases } from "@/lib/projecten";
+import { ArrowRight, Check } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "Portfolio: websites die wij bouwden",
   description:
-    "Bekijk ons eerdere werk: maatwerk websites en webshops voor ondernemers door heel Nederland.",
+    "Bekijk ons eerdere werk: maatwerk websites en webshops voor ondernemers door heel Nederland, met een echte live preview.",
   alternates: { canonical: "/portfolio" },
 };
 
 export default function Portfolio() {
+  const featured = echteCases[0];
+  const overige = projecten.filter((p) => p !== featured);
+
   return (
     <>
       <div className="page-hero">
@@ -19,82 +23,80 @@ export default function Portfolio() {
           <h1>Ons werk</h1>
           <p className="lead">
             Elke website die we bouwen is maatwerk: snel, strak en gemaakt om
-            klanten op te leveren. Een greep uit onze projecten.
+            klanten op te leveren. Bekijk hieronder een echte live preview van
+            ons werk.
           </p>
         </div>
       </div>
 
       <section className="white">
         <div className="container">
-          <div
-            className="cards"
-            style={{ gridTemplateColumns: "repeat(2, 1fr)", marginTop: 0 }}
-          >
-            {projecten.map((p) => {
-              const inner = (
-                <>
-                  <div
-                    className="mockup"
-                    style={{ transform: "none", marginBottom: 24 }}
-                  >
-                    <div className="mockup-bar">
-                      <span className="dot" style={{ background: "#ff5f57" }} />
-                      <span className="dot" style={{ background: "#febc2e" }} />
-                      <span className="dot" style={{ background: "#28c840" }} />
-                      <div className="mockup-url">
-                        {p.echt && p.liveUrl
-                          ? p.liveUrl.replace("https://", "")
-                          : "www.klantwebsite.nl"}
-                      </div>
-                    </div>
-                    <div className="mockup-body">
-                      <div
-                        className="sk sk-hero"
-                        style={{
-                          background: `linear-gradient(135deg, ${p.kleur}, ${p.accent})`,
-                        }}
-                      >
-                        {p.naam}
-                      </div>
-                      <div className="sk-row">
-                        <div className="sk" />
-                        <div className="sk" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="case-meta">
-                    <h3>{p.naam}</h3>
-                    {p.echt && <span className="case-badge">Case</span>}
-                  </div>
-                  <p>
-                    {p.type}
-                    {p.plaats ? ` · ${p.plaats}` : ""}
-                  </p>
-                  {p.echt && (
-                    <p className="case-kort">{p.kort}</p>
-                  )}
-                  {p.echt && (
-                    <span className="case-link">
-                      Bekijk de case <ArrowRight size={16} />
-                    </span>
-                  )}
-                </>
-              );
+          {/* Uitgelichte case met echte live preview */}
+          {featured && (
+            <Link
+              href={`/portfolio/${featured.slug}`}
+              className="case-featured"
+              aria-label={`Bekijk de case van ${featured.naam}`}
+            >
+              <div className="case-featured-preview">
+                <SitePreview
+                  url={featured.liveUrl}
+                  naam={featured.naam}
+                  kleur={featured.kleur}
+                  accent={featured.accent}
+                />
+              </div>
+              <div
+                className="case-featured-info"
+                style={{
+                  background: `linear-gradient(150deg, ${featured.kleur}, ${featured.accent})`,
+                }}
+              >
+                <span className="case-featured-tag">
+                  <Check size={15} /> Uitgelichte case
+                </span>
+                <h2>{featured.naam}</h2>
+                <p className="case-featured-sector">
+                  {featured.type}
+                  {featured.plaats ? ` · ${featured.plaats}` : ""}
+                </p>
+                <p className="case-featured-kort">{featured.kort}</p>
+                <span className="case-featured-cta">
+                  Bekijk de volledige case <ArrowRight size={17} />
+                </span>
+              </div>
+            </Link>
+          )}
 
-              return p.echt ? (
-                <Link
-                  key={p.naam}
-                  href={`/portfolio/${p.slug}`}
-                  className="card city-card"
-                >
-                  {inner}
-                </Link>
-              ) : (
-                <div key={p.naam} className="card is-placeholder">
-                  {inner}
+          {/* Overige projecten */}
+          <div className="portfolio-more">
+            <h2>Meer projecten</h2>
+            <p className="sub">
+              We werken continu aan nieuwe websites. Deze cases komen er
+              binnenkort bij.
+            </p>
+          </div>
+          <div className="soon-grid">
+            {overige.map((p, i) => (
+              <div
+                key={i}
+                className="soon-card"
+                style={{
+                  background: `linear-gradient(150deg, ${p.kleur}, ${p.accent})`,
+                }}
+              >
+                <span className="soon-badge">Binnenkort</span>
+                <div className="soon-browser" aria-hidden="true">
+                  <span className="dot" />
+                  <span className="dot" />
+                  <span className="dot" />
                 </div>
-              );
-            })}
+                <div className="soon-meta">
+                  <h3>{p.type}</h3>
+                  <p>Een nieuwe case is in de maak.</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

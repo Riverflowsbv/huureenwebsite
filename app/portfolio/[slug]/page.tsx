@@ -5,6 +5,7 @@ import CtaBand from "@/components/CtaBand";
 import { projecten, echteCases } from "@/lib/projecten";
 import { site } from "@/lib/site";
 import { Check, ArrowRight } from "@/components/icons";
+import SitePreview from "@/components/SitePreview";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -80,39 +81,25 @@ export default async function CasePagina({ params }: Props) {
         </div>
       </div>
 
-      {/* Preview */}
+      {/* Echte live preview */}
       <section className="white" style={{ paddingBottom: 40 }}>
         <div className="container">
-          <div
-            className="mockup case-mockup"
-            style={{ transform: "none", maxWidth: 900, margin: "0 auto" }}
-          >
-            <div className="mockup-bar">
-              <span className="dot" style={{ background: "#ff5f57" }} />
-              <span className="dot" style={{ background: "#febc2e" }} />
-              <span className="dot" style={{ background: "#28c840" }} />
-              <div className="mockup-url">
-                {p.liveUrl ? p.liveUrl.replace("https://", "") : ""}
-              </div>
-            </div>
-            <div className="mockup-body">
-              <div
-                className="sk sk-hero"
-                style={{
-                  height: 220,
-                  background: `linear-gradient(135deg, ${p.kleur}, ${p.accent})`,
-                }}
-              >
-                {p.naam}
-              </div>
-              <div className="sk-row">
-                <div className="sk" />
-                <div className="sk" />
-                <div className="sk" />
-              </div>
-              <div className="sk sk-line" />
-              <div className="sk sk-line short" />
-            </div>
+          <div style={{ maxWidth: 940, margin: "0 auto" }}>
+            <SitePreview
+              url={p.liveUrl}
+              naam={p.naam}
+              kleur={p.kleur}
+              accent={p.accent}
+              ratio={0.66}
+            />
+            {p.liveUrl && (
+              <p className="preview-note">
+                Dit is de echte website, live geladen.{" "}
+                <a href={p.liveUrl} target="_blank" rel="noopener noreferrer">
+                  Open in een nieuw tabblad <ArrowRight size={14} />
+                </a>
+              </p>
+            )}
           </div>
         </div>
       </section>
