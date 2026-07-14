@@ -30,7 +30,7 @@ const faqItems = [
   {
     vraag: "Hoe snel sta ik online?",
     antwoord:
-      "Meestal binnen 1 week nadat we alles besproken hebben. Wij schrijven de teksten en regelen de afbeeldingen, dus jij hoeft niets aan te leveren als je dat niet wil.",
+      "Meestal binnen 2 weken nadat we alles besproken hebben. Heb je haast? Met onze spoed-oplevering sta je al binnen 48 tot 72 uur online. Wij schrijven de teksten en regelen de afbeeldingen, dus jij hoeft niets aan te leveren als je dat niet wil.",
   },
   {
     vraag: "Ik snap niets van websites. Is dat een probleem?",
@@ -51,7 +51,7 @@ export default function Home() {
         <div className="container hero-grid">
           <div>
             <div className="eyebrow">
-              <Check size={16} /> Binnen 1 week live, geen dure investering vooraf
+              <Check size={16} /> Binnen 2 weken live, geen dure investering vooraf
             </div>
             <h1>
               Een professionele website, <em>zonder gedoe</em>
@@ -103,7 +103,7 @@ export default function Home() {
               </div>
             </div>
             <div className="badge-live">
-              <span className="pulse" /> Live binnen 1 week
+              <span className="pulse" /> Live binnen 2 weken
             </div>
           </div>
         </div>
@@ -170,7 +170,7 @@ export default function Home() {
             {[
               {
                 tekst:
-                  '"Ik snap niks van websites en dat hoefde ook niet. Binnen een week stond alles online en het ziet er echt professioneel uit."',
+                  '"Ik snap niks van websites en dat hoefde ook niet. Binnen twee weken stond alles online en het ziet er echt professioneel uit."',
                 wie: "[Naam klant]",
                 bedrijf: "[Bedrijf], [plaats]",
               },

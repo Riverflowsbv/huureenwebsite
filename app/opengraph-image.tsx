@@ -84,7 +84,7 @@ export default function OpengraphImage() {
             Vanaf €99 per maand
           </div>
           <div style={{ display: "flex", fontSize: 26, color: "#8d99b8" }}>
-            Binnen 1 week live · geen dure investering vooraf
+            Binnen 2 weken live · geen dure investering vooraf
           </div>
         </div>
       </div>

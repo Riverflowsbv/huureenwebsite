@@ -40,7 +40,7 @@ export const addonGroepen: AddonGroep[] = [
         id: "extra-mailbox",
         naam: "Extra mailbox",
         prijs: "€2,50",
-        eenheid: "per maand",
+        eenheid: "p/mnd per mailbox",
         cartType: "maandelijks",
         bedrag: 2.5,
         beschrijving:
@@ -74,7 +74,7 @@ export const addonGroepen: AddonGroep[] = [
         cartType: "eenmalig",
         bedrag: 149,
         beschrijving:
-          "Haast? Dan zetten we jouw project vooraan in de rij en leveren we versneld op.",
+          "Haast? Dan zetten we jouw project vooraan in de rij en leveren we binnen 48 tot 72 uur op, in plaats van de gebruikelijke twee weken.",
       },
     ],
   },

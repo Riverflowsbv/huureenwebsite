@@ -112,7 +112,7 @@ export default function AlgemeneVoorwaarden() {
             <p>
               Wij spannen ons in om de website vakkundig en binnen de afgesproken
               termijn op te leveren. Genoemde doorlooptijden (zoals &quot;binnen
-              1 week live&quot;) zijn indicatief en afhankelijk van tijdige
+              2 weken live&quot;) zijn indicatief en afhankelijk van tijdige
               aanlevering van informatie door de klant.
             </p>
 

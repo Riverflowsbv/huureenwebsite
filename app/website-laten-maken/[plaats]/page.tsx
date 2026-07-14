@@ -46,7 +46,7 @@ export default async function StadPagina({ params }: Props) {
     {
       vraag: "Hoe snel staat mijn website online?",
       antwoord:
-        "Een huurwebsite staat meestal binnen 1 week live. Maatwerkprojecten duren 2 tot 4 weken, afhankelijk van de omvang.",
+        "Een huurwebsite staat meestal binnen 2 weken live, of binnen 48 tot 72 uur als je voor spoed kiest. Maatwerkprojecten duren 2 tot 4 weken, afhankelijk van de omvang.",
     },
   ];
 
@@ -151,7 +151,7 @@ export default async function StadPagina({ params }: Props) {
 
       <Steps
         titel={`Zo snel heb jij een website in ${stad.naam}`}
-        sub="Van kennismaking tot live, gemiddeld binnen 1 week."
+        sub="Van kennismaking tot live, gemiddeld binnen 2 weken."
       />
       <Faq
         items={faqItems}

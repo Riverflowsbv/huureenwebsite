@@ -9,7 +9,7 @@ import { Check, Zap, Shield, Handshake } from "@/components/icons";
 export const metadata: Metadata = {
   title: "Professionele website vanaf €199",
   description:
-    "Een gloednieuwe, professionele website vanaf €199 opstartkosten en €99 per maand. Ontwerp, hosting, onderhoud én vindbaarheid inbegrepen. Binnen 1 week live.",
+    "Een gloednieuwe, professionele website vanaf €199 opstartkosten en €99 per maand. Ontwerp, hosting, onderhoud én vindbaarheid inbegrepen. Binnen 2 weken live.",
   alternates: { canonical: "/website-vanaf-199" },
 };
 
@@ -32,7 +32,7 @@ const faqItems = [
   {
     vraag: "Hoe snel sta ik online?",
     antwoord:
-      "Meestal binnen 1 week nadat we alles besproken hebben. Wij schrijven de teksten en regelen de afbeeldingen, dus jij hoeft niets aan te leveren als je dat niet wil.",
+      "Meestal binnen 2 weken nadat we alles besproken hebben. Heb je haast? Met onze spoed-oplevering sta je al binnen 48 tot 72 uur online. Wij schrijven de teksten en regelen de afbeeldingen, dus jij hoeft niets aan te leveren als je dat niet wil.",
   },
 ];
 
@@ -42,14 +42,14 @@ export default function WebsiteVanaf199() {
       <div className="page-hero">
         <div className="container">
           <div className="eyebrow">
-            <Check size={16} /> Binnen 1 week live · geen dure investering vooraf
+            <Check size={16} /> Binnen 2 weken live · geen dure investering vooraf
           </div>
           <h1>
             Een gloednieuwe, professionele website <em>vanaf €199</em>
           </h1>
           <p className="lead">
             Geen duizenden euro&apos;s vooraf. Voor <strong>€199 opstartkosten</strong>{" "}
-            sta je binnen één week professioneel online, daarna{" "}
+            sta je binnen twee weken professioneel online, daarna{" "}
             <strong>€99 per maand</strong> met álles inbegrepen: ontwerp,
             hosting, onderhoud, mailadres en vindbaarheid in Google.
           </p>
@@ -137,7 +137,7 @@ export default function WebsiteVanaf199() {
 
       <Pricing />
       <Steps
-        titel="Zo sta je binnen 1 week online"
+        titel="Zo sta je binnen 2 weken online"
         sub="Jij vertelt over je bedrijf, wij regelen de rest."
       />
       <Faq

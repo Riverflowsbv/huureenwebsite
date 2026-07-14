@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s | HuurEenWebsite.nl",
   },
   description:
-    "Een professionele website zonder dure investering vooraf: €199 opstartkosten, daarna €99 per maand. Compleet geregeld: ontwerp, hosting, onderhoud en SEO. Binnen 1 week live.",
+    "Een professionele website zonder dure investering vooraf: €199 opstartkosten, daarna €99 per maand. Compleet geregeld: ontwerp, hosting, onderhoud en SEO. Binnen 2 weken live.",
   openGraph: {
     siteName: site.naam,
     locale: "nl_NL",

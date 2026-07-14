@@ -10,7 +10,7 @@ const defaultStappen = [
       "Ontwerp, teksten, foto's, techniek: wij maken het compleet af. Jij kijkt mee en zegt wat je ervan vindt.",
   },
   {
-    titel: "Binnen 1 week live",
+    titel: "Binnen 2 weken live",
     tekst:
       "Je website staat online en blijft in topconditie. Updates, beveiliging en aanpassingen? Geregeld. Voor één vast bedrag per maand.",
   },

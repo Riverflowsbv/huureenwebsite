@@ -10,7 +10,7 @@ import { Check, Palette, Wrench, TrendingUp } from "@/components/icons";
 export const metadata: Metadata = {
   title: "Website huren: alles inclusief v.a. €99",
   description:
-    "Huur een professionele maatwerk website: €199 opstartkosten, daarna €99 per maand. Inclusief hosting, onderhoud, mailadres en SEO. Binnen 1 week live.",
+    "Huur een professionele maatwerk website: €199 opstartkosten, daarna €99 per maand. Inclusief hosting, onderhoud, mailadres en SEO. Binnen 2 weken live.",
   alternates: { canonical: "/website-huren" },
 };
 
@@ -106,7 +106,7 @@ export default function WebsiteHuren() {
       <Pricing />
       <Steps
         titel="Van gesprek naar live in 3 stappen"
-        sub="Gemiddeld staat je website binnen 1 week online."
+        sub="Gemiddeld staat je website binnen 2 weken online, of binnen 48 tot 72 uur met spoed."
       />
       <SelfServe />
       <Faq
