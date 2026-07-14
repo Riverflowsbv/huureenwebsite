@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { pakketten, site } from "@/lib/site";
+import type { PakketGroep } from "@/lib/site";
 import { Check, Cross, ArrowRight } from "@/components/icons";
 
 type Props = {
@@ -8,6 +9,46 @@ type Props = {
 
 export default function Pricing({ variant = "full" }: Props) {
   const compact = variant === "compact";
+
+  const renderGroup = (g: PakketGroep) => (
+    <div className="plan-group" key={g.label}>
+      <div className="plan-group-label">{g.label}</div>
+      <ul>
+        {g.items.map((item) => {
+          const uitbreidbaar = item.status === "uitbreidbaar";
+          return (
+            <li
+              key={item.tekst}
+              className={`plan-feat${uitbreidbaar ? " uitbreidbaar" : ""}`}
+            >
+              {uitbreidbaar ? (
+                <Cross className="ic-cross" size={17} />
+              ) : (
+                <Check className="ic-check" size={17} />
+              )}
+              <span className="plan-feat-text">
+                {item.tekst}
+                {item.detail && (
+                  <span className="plan-feat-detail">{item.detail}</span>
+                )}
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+
+  const renderKern = (items: PakketGroep["items"]) => (
+    <ul className="plan-compact-list">
+      {items.map((item) => (
+        <li key={item.tekst}>
+          <Check className="ic-check" size={17} />
+          <span>{item.tekst}</span>
+        </li>
+      ))}
+    </ul>
+  );
 
   return (
     <section className="pricing" id="pakketten">
@@ -21,6 +62,14 @@ export default function Pricing({ variant = "full" }: Props) {
           {pakketten.map((p, i) => {
             const website = p.groepen.find((g) => g.label === "Website");
             const onderhoud = p.groepen.find((g) => g.label === "Onderhoud");
+            const kernItems = [
+              ...(website?.items ?? []),
+              ...(onderhoud?.items ?? []),
+            ];
+            // Op mobiel klappen we de overige groepen uit (niet de kernkenmerken).
+            const restGroepen = p.groepen.filter(
+              (g) => g.label !== "Website" && g.label !== "Onderhoud"
+            );
 
             return (
               <div
@@ -42,21 +91,7 @@ export default function Pricing({ variant = "full" }: Props) {
 
                 {compact ? (
                   <>
-                    {/* Korte samenvatting: de belangrijkste verschillen */}
-                    <ul className="plan-compact-list">
-                      {website?.items.map((item) => (
-                        <li key={item.tekst}>
-                          <Check className="ic-check" size={17} />
-                          <span>{item.tekst}</span>
-                        </li>
-                      ))}
-                      {onderhoud?.items.map((item) => (
-                        <li key={item.tekst}>
-                          <Check className="ic-check" size={17} />
-                          <span>{item.tekst}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    {renderKern(kernItems)}
                     <Link
                       href="/website-huren#pakketten"
                       className="plan-more-link"
@@ -65,46 +100,24 @@ export default function Pricing({ variant = "full" }: Props) {
                     </Link>
                   </>
                 ) : (
-                  <details className="plan-details" open={p.populair}>
-                    <summary className="plan-details-sum">
-                      Bekijk alle kenmerken
-                    </summary>
-                    <div className="plan-groups">
-                      {p.groepen.map((g) => (
-                        <div className="plan-group" key={g.label}>
-                          <div className="plan-group-label">{g.label}</div>
-                          <ul>
-                            {g.items.map((item) => {
-                              const uitbreidbaar =
-                                item.status === "uitbreidbaar";
-                              return (
-                                <li
-                                  key={item.tekst}
-                                  className={`plan-feat${
-                                    uitbreidbaar ? " uitbreidbaar" : ""
-                                  }`}
-                                >
-                                  {uitbreidbaar ? (
-                                    <Cross className="ic-cross" size={17} />
-                                  ) : (
-                                    <Check className="ic-check" size={17} />
-                                  )}
-                                  <span className="plan-feat-text">
-                                    {item.tekst}
-                                    {item.detail && (
-                                      <span className="plan-feat-detail">
-                                        {item.detail}
-                                      </span>
-                                    )}
-                                  </span>
-                                </li>
-                              );
-                            })}
-                          </ul>
-                        </div>
-                      ))}
+                  <>
+                    {/* Desktop: alle groepen altijd zichtbaar */}
+                    <div className="plan-groups plan-groups-desk">
+                      {p.groepen.map(renderGroup)}
                     </div>
-                  </details>
+                    {/* Mobiel: kernkenmerken + uitklapbare rest */}
+                    <div className="plan-mob">
+                      {renderKern(kernItems)}
+                      <details className="plan-details">
+                        <summary className="plan-details-sum">
+                          Alle kenmerken bekijken
+                        </summary>
+                        <div className="plan-groups">
+                          {restGroepen.map(renderGroup)}
+                        </div>
+                      </details>
+                    </div>
+                  </>
                 )}
 
                 <Link
