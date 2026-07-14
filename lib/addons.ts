@@ -50,16 +50,6 @@ export const addonGroepen: AddonGroep[] = [
           "Een extra e-mailadres op je eigen domein om te versturen en ontvangen, bijvoorbeeld info@ of een adres voor een collega. Alleen e-mail, geen agenda of opslag.",
       },
       {
-        id: "tweetalig",
-        naam: "Tweetalige website (NL/EN)",
-        prijs: "€19",
-        eenheid: "per maand",
-        cartType: "maandelijks",
-        bedrag: 19,
-        beschrijving:
-          "Je website in het Nederlands én Engels. Handig als je ook internationale klanten bedient.",
-      },
-      {
         id: "extra-pagina",
         naam: "Extra pagina",
         prijs: "€7,50",
@@ -69,6 +59,16 @@ export const addonGroepen: AddonGroep[] = [
         perStuk: true,
         beschrijving:
           "Je pakket heeft een maximaal aantal pagina's. Meer nodig? Voeg losse pagina's toe, per stuk.",
+      },
+      {
+        id: "tweetalig",
+        naam: "Tweetalige website (NL/EN)",
+        prijs: "€19",
+        eenheid: "per maand",
+        cartType: "maandelijks",
+        bedrag: 19,
+        beschrijving:
+          "Je website in het Nederlands én Engels. Handig als je ook internationale klanten bedient.",
       },
       {
         id: "prioriteit-support",
