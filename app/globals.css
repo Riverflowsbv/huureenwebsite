@@ -286,6 +286,9 @@ footer.site a:hover{color:#fff}
 .sum-section-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:10px}
 .sum-row{display:flex;justify-content:space-between;gap:16px;font-size:15px;color:var(--ink);padding:5px 0}
 .sum-row.sum-total{font-weight:800;color:var(--navy);border-top:1px solid var(--line);margin-top:6px;padding-top:12px;font-size:16.5px}
+.sum-row-right{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.sum-remove{width:19px;height:19px;display:inline-flex;align-items:center;justify-content:center;border:none;background:transparent;color:#b3bccf;cursor:pointer;border-radius:5px;transition:.15s;flex-shrink:0;padding:0}
+.sum-remove:hover{color:var(--navy);background:var(--bg)}
 .checkout-summary-card .btn{margin-top:8px}
 .checkout-status{margin-top:14px;font-size:14px;color:var(--navy);background:#eef2ff;border-radius:10px;padding:12px 14px;line-height:1.5}
 .checkout-fine{list-style:none;margin-top:20px;display:grid;gap:9px;font-size:13.5px;color:var(--muted)}

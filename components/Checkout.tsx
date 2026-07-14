@@ -53,6 +53,8 @@ export default function Checkout() {
     setAantal((a) => ({ ...a, [id]: clamp((a[id] ?? 0) + delta) }));
   const toggle = (id: string) =>
     setAantal((a) => ({ ...a, [id]: (a[id] ?? 0) > 0 ? 0 : 1 }));
+  const verwijder = (id: string) =>
+    setAantal((a) => ({ ...a, [id]: 0 }));
 
   const { maandTotaal, eenmaligTotaal } = useMemo(() => {
     const som = (list: typeof cartAddons) =>
@@ -279,7 +281,17 @@ export default function Checkout() {
                       {a.naam}
                       {qty(a.id) > 1 ? ` × ${qty(a.id)}` : ""}
                     </span>
-                    <span>{euro((a.bedrag ?? 0) * qty(a.id))}</span>
+                    <span className="sum-row-right">
+                      {euro((a.bedrag ?? 0) * qty(a.id))}
+                      <button
+                        type="button"
+                        className="sum-remove"
+                        onClick={() => verwijder(a.id)}
+                        aria-label={`${a.naam} verwijderen`}
+                      >
+                        <Cross size={13} />
+                      </button>
+                    </span>
                   </div>
                 ))}
                 <div className="sum-row sum-total">
@@ -300,7 +312,17 @@ export default function Checkout() {
                       {a.naam}
                       {qty(a.id) > 1 ? ` × ${qty(a.id)}` : ""}
                     </span>
-                    <span>{euro((a.bedrag ?? 0) * qty(a.id))}</span>
+                    <span className="sum-row-right">
+                      {euro((a.bedrag ?? 0) * qty(a.id))}
+                      <button
+                        type="button"
+                        className="sum-remove"
+                        onClick={() => verwijder(a.id)}
+                        aria-label={`${a.naam} verwijderen`}
+                      >
+                        <Cross size={13} />
+                      </button>
+                    </span>
                   </div>
                 ))}
                 <div className="sum-row sum-total">
