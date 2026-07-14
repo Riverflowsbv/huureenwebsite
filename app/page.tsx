@@ -122,7 +122,7 @@ export default function Home() {
       </div>
 
       <Steps />
-      <Pricing />
+      <Pricing variant="compact" />
 
       <section>
         <div className="container">

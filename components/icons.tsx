@@ -64,6 +64,26 @@ export function Cross({ className, size = 20 }: IconProps) {
   );
 }
 
+export function Info({ className, size = 18 }: IconProps) {
+  return (
+    <svg
+      className={className}
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 16v-5M12 8h.01" />
+    </svg>
+  );
+}
+
 export function Star({ className, size = 18 }: IconProps) {
   return (
     <svg

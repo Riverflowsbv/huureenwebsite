@@ -34,7 +34,7 @@ export default function Contact() {
               <p>
                 <a href={site.telefoonLink}>{site.telefoon}</a>
                 <br />
-                Ma t/m vr, 9:00 - 17:30
+                Ma t/m vr, 9:00 - 17:00
               </p>
             </div>
             <div className="card">

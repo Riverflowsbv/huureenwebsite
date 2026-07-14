@@ -130,6 +130,25 @@ svg{display:block}
 .plan .btn{margin-top:auto;justify-content:center}
 .plan-note{text-align:center;color:var(--muted);font-size:14px;margin-top:28px}
 
+/* Compacte variant (homepage): korte kaart + meer-info-link */
+.plan-compact-list{list-style:none;margin:22px 0 18px;display:grid;gap:11px;font-size:15px}
+.plan-compact-list li{display:flex;gap:10px;align-items:flex-start;line-height:1.45}
+.plan-compact-list .ic-check{margin-top:2px;color:var(--green);flex-shrink:0}
+.plan-more-link{display:inline-flex;align-items:center;gap:6px;color:var(--blue);font-weight:700;font-size:14.5px;margin-bottom:26px;transition:gap .2s ease}
+.plan-more-link:hover{gap:10px}
+
+/* Volledige variant: details op mobiel inklapbaar, op desktop altijd open */
+.plan-details{margin:0;width:100%}
+.plan-details-sum{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;font-weight:700;font-size:15px;color:var(--navy);padding:15px 0;margin-top:20px;border-top:1px solid var(--line)}
+.plan-details-sum::-webkit-details-marker{display:none}
+.plan-details-sum::after{content:"";width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:transform .2s ease;margin-right:4px}
+.plan-details[open] .plan-details-sum::after{transform:rotate(-135deg)}
+.plan-details:not([open])>.plan-groups{display:none}
+@media(min-width:921px){
+  .plan-details-sum{display:none}
+  .plan-details>.plan-groups{display:grid!important}
+}
+
 /* Compare */
 .compare-card{background:var(--navy);border-radius:22px;padding:56px;color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:52px}
 .compare-card h3{color:#fff;font-size:22px;margin-bottom:18px}
@@ -217,6 +236,22 @@ footer.site a:hover{color:#fff}
 .pakket-optie-prijs{font-weight:800;color:var(--navy);text-align:right}
 .pakket-optie-prijs small{font-weight:600;color:var(--muted);font-size:13px}
 .pakket-optie-voor{grid-column:1 / -1;color:var(--muted);font-size:14px}
+
+/* Info-popover per pakket op de afreken-pagina */
+.pakket-optie-wrap{position:relative}
+.pakket-optie-wrap .pakket-optie{width:100%;padding-right:50px}
+.pakket-info-btn{position:absolute;top:15px;right:13px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;color:#9aa3b8;cursor:pointer;border-radius:8px;transition:.15s;z-index:2}
+.pakket-info-btn:hover{color:var(--blue);background:var(--bg)}
+.pakket-info-pop{position:absolute;z-index:30;top:calc(100% - 4px);right:0;width:min(300px,calc(100vw - 56px));background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 16px 44px rgba(14,27,61,.18);padding:16px 18px;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .16s ease,transform .16s ease;pointer-events:none}
+.pakket-optie-wrap.info-open .pakket-info-pop{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+@media(hover:hover){
+  .pakket-info-btn:hover ~ .pakket-info-pop{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+}
+.pakket-info-pop-title{font-weight:800;font-size:13px;color:var(--navy);margin-bottom:11px}
+.pakket-info-pop ul{list-style:none;display:grid;gap:8px;font-size:13.5px;color:var(--ink)}
+.pakket-info-pop ul li{display:flex;gap:8px;align-items:flex-start;line-height:1.4}
+.pakket-info-pop ul li .ic-check{margin-top:1px;color:var(--green);flex-shrink:0}
+.pakket-info-pop-link{display:inline-flex;align-items:center;gap:5px;color:var(--blue);font-weight:700;font-size:13px;margin-top:13px}
 .addon-keuze{display:grid;gap:12px}
 .addon-optie{display:flex;gap:16px;align-items:center;justify-content:space-between;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:15px 18px;transition:.18s}
 .addon-optie:hover{border-color:#c4cee6}
@@ -434,7 +469,7 @@ a,button{-webkit-tap-highlight-color:transparent}
   .hero-visual{display:none}
   .steps,.plans,.reviews-grid,.cards{grid-template-columns:1fr}
   .compare-card{grid-template-columns:1fr;padding:40px 28px}
-  .foot-grid{grid-template-columns:1fr 1fr}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:26px 20px}
   .usp-strip ul{flex-direction:column;align-items:center;gap:13px}
   .field-row{grid-template-columns:1fr;gap:0}
   .contact-form{padding:26px}
@@ -458,4 +493,5 @@ a,button{-webkit-tap-highlight-color:transparent}
 
 @media (max-width:560px){
   .soon-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr;gap:28px}
 }

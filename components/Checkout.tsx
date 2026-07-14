@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { pakketten, site } from "@/lib/site";
 import { cartAddons } from "@/lib/addons";
-import { Check } from "@/components/icons";
+import { Check, Info, ArrowRight } from "@/components/icons";
 
 function euro(n: number) {
   return `€${n.toLocaleString("nl-NL", {
@@ -28,6 +28,7 @@ export default function Checkout() {
   const [aantal, setAantal] = useState<Record<string, number>>({});
   const [status, setStatus] = useState<string | null>(null);
   const [bezig, setBezig] = useState(false);
+  const [infoOpen, setInfoOpen] = useState<string | null>(null);
 
   const pakket = pakketten.find((p) => p.naam === pakketNaam)!;
   const maandAddons = cartAddons.filter((a) => a.cartType === "maandelijks");
@@ -149,22 +150,69 @@ export default function Checkout() {
             <div className="checkout-block">
               <h2>1. Je pakket</h2>
               <div className="pakket-keuze">
-                {pakketten.map((p) => (
-                  <button
-                    key={p.naam}
-                    type="button"
-                    className={`pakket-optie${
-                      p.naam === pakketNaam ? " actief" : ""
-                    }`}
-                    onClick={() => setPakketNaam(p.naam)}
-                  >
-                    <span className="pakket-optie-naam">{p.naam}</span>
-                    <span className="pakket-optie-prijs">
-                      {euro(p.prijs)} <small>p/mnd</small>
-                    </span>
-                    <span className="pakket-optie-voor">{p.voor}</span>
-                  </button>
-                ))}
+                {pakketten.map((p) => {
+                  const website = p.groepen.find((g) => g.label === "Website");
+                  const onderhoud = p.groepen.find(
+                    (g) => g.label === "Onderhoud"
+                  );
+                  const infoItems = [
+                    ...(website?.items ?? []),
+                    ...(onderhoud?.items ?? []),
+                  ];
+                  const open = infoOpen === p.naam;
+                  return (
+                    <div
+                      key={p.naam}
+                      className={`pakket-optie-wrap${open ? " info-open" : ""}`}
+                    >
+                      <button
+                        type="button"
+                        className={`pakket-optie${
+                          p.naam === pakketNaam ? " actief" : ""
+                        }`}
+                        onClick={() => setPakketNaam(p.naam)}
+                      >
+                        <span className="pakket-optie-naam">{p.naam}</span>
+                        <span className="pakket-optie-prijs">
+                          {euro(p.prijs)} <small>p/mnd</small>
+                        </span>
+                        <span className="pakket-optie-voor">{p.voor}</span>
+                      </button>
+                      <button
+                        type="button"
+                        className="pakket-info-btn"
+                        aria-label={`Wat zit er in pakket ${p.naam}?`}
+                        aria-expanded={open}
+                        onClick={() => setInfoOpen(open ? null : p.naam)}
+                      >
+                        <Info size={18} />
+                      </button>
+                      <div
+                        className="pakket-info-pop"
+                        role="region"
+                        aria-label={`Inhoud pakket ${p.naam}`}
+                      >
+                        <div className="pakket-info-pop-title">
+                          Dit zit in {p.naam}
+                        </div>
+                        <ul>
+                          {infoItems.map((item) => (
+                            <li key={item.tekst}>
+                              <Check className="ic-check" size={15} />
+                              {item.tekst}
+                            </li>
+                          ))}
+                        </ul>
+                        <Link
+                          href="/website-huren#pakketten"
+                          className="pakket-info-pop-link"
+                        >
+                          Volledige vergelijking <ArrowRight size={13} />
+                        </Link>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 

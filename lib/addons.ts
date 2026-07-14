@@ -71,6 +71,15 @@ export const addonGroepen: AddonGroep[] = [
           "Je pakket heeft een maximaal aantal pagina's. Meer nodig? Voeg losse pagina's toe, per stuk.",
       },
       {
+        id: "reserveringen",
+        naam: "Online reserveringen",
+        prijs: "Op aanvraag",
+        eenheid: "",
+        cartType: "offerte",
+        beschrijving:
+          "Laat klanten zelf een afspraak of boeking inplannen, gekoppeld aan je agenda. De prijs hangt af van de gewenste koppeling.",
+      },
+      {
         id: "spoed",
         naam: "Spoed-oplevering",
         prijs: "€149",
