@@ -14,6 +14,8 @@ function euro(n: number) {
   })}`;
 }
 
+const MAX_AANTAL = 25;
+
 export default function Checkout() {
   const params = useSearchParams();
   const startPakket = params.get("pakket")?.toLowerCase();
@@ -22,39 +24,40 @@ export default function Checkout() {
     pakketten.find((p) => p.naam.toLowerCase() === startPakket)?.naam ??
       pakketten[0].naam
   );
-  const [gekozen, setGekozen] = useState<string[]>([]);
+  // Aantal per add-on. 0 = niet gekozen. Voor vinkjes is het 0 of 1.
+  const [aantal, setAantal] = useState<Record<string, number>>({});
   const [status, setStatus] = useState<string | null>(null);
   const [bezig, setBezig] = useState(false);
 
   const pakket = pakketten.find((p) => p.naam === pakketNaam)!;
-
   const maandAddons = cartAddons.filter((a) => a.cartType === "maandelijks");
   const eenmaligAddons = cartAddons.filter((a) => a.cartType === "eenmalig");
 
+  const qty = (id: string) => aantal[id] ?? 0;
+  const clamp = (n: number) => Math.min(MAX_AANTAL, Math.max(0, n));
+  const changeQty = (id: string, delta: number) =>
+    setAantal((a) => ({ ...a, [id]: clamp((a[id] ?? 0) + delta) }));
   const toggle = (id: string) =>
-    setGekozen((g) =>
-      g.includes(id) ? g.filter((x) => x !== id) : [...g, id]
-    );
+    setAantal((a) => ({ ...a, [id]: (a[id] ?? 0) > 0 ? 0 : 1 }));
 
   const { maandTotaal, eenmaligTotaal } = useMemo(() => {
-    const maandExtra = maandAddons
-      .filter((a) => gekozen.includes(a.id))
-      .reduce((s, a) => s + (a.bedrag ?? 0), 0);
-    const eenmaligExtra = eenmaligAddons
-      .filter((a) => gekozen.includes(a.id))
-      .reduce((s, a) => s + (a.bedrag ?? 0), 0);
+    const som = (list: typeof cartAddons) =>
+      list.reduce((s, a) => s + (a.bedrag ?? 0) * qty(a.id), 0);
     return {
-      maandTotaal: pakket.prijs + maandExtra,
-      eenmaligTotaal: site.setupFee + eenmaligExtra,
+      maandTotaal: pakket.prijs + som(maandAddons),
+      eenmaligTotaal: site.setupFee + som(eenmaligAddons),
     };
-  }, [pakket.prijs, gekozen, maandAddons, eenmaligAddons]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pakket.prijs, aantal, maandAddons, eenmaligAddons]);
 
   async function afrekenen() {
     setBezig(true);
     setStatus(null);
     const order = {
       pakket: pakket.naam,
-      addons: gekozen,
+      addons: cartAddons
+        .filter((a) => qty(a.id) > 0)
+        .map((a) => ({ id: a.id, aantal: qty(a.id) })),
       maandTotaal,
       eenmaligTotaal,
     };
@@ -66,7 +69,7 @@ export default function Checkout() {
       });
       const data = await res.json();
       if (data.url) {
-        window.location.href = data.url; // Stripe Checkout (fase 2)
+        window.location.href = data.url;
       } else {
         setStatus(
           data.message ??
@@ -82,11 +85,66 @@ export default function Checkout() {
     }
   }
 
+  const renderAddon = (a: (typeof cartAddons)[number], eenmalig: boolean) => {
+    const n = qty(a.id);
+    const gekozen = n > 0;
+    const per = eenmalig ? "eenmalig" : "p/mnd";
+    const control = a.perStuk ? (
+      <div className="qty-stepper" aria-label={`Aantal ${a.naam}`}>
+        <button
+          type="button"
+          onClick={() => changeQty(a.id, -1)}
+          disabled={n === 0}
+          aria-label="Minder"
+        >
+          −
+        </button>
+        <span>{n}</span>
+        <button
+          type="button"
+          onClick={() => changeQty(a.id, 1)}
+          aria-label="Meer"
+        >
+          +
+        </button>
+      </div>
+    ) : (
+      <input
+        type="checkbox"
+        className="addon-check"
+        checked={gekozen}
+        onChange={() => toggle(a.id)}
+        aria-label={`${a.naam} toevoegen`}
+      />
+    );
+
+    return (
+      <div
+        key={a.id}
+        className={`addon-optie${gekozen ? " actief" : ""}`}
+      >
+        <span className="addon-optie-tekst">
+          <span className="addon-optie-naam">{a.naam}</span>
+          <span className="addon-optie-desc">{a.beschrijving}</span>
+        </span>
+        <span className="addon-optie-right">
+          <span className="addon-optie-prijs">
+            +{euro(a.bedrag ?? 0)}
+            <small> {per}</small>
+          </span>
+          {control}
+        </span>
+      </div>
+    );
+  };
+
+  const gekozenAddons = (list: typeof cartAddons) =>
+    list.filter((a) => qty(a.id) > 0);
+
   return (
     <section className="white">
       <div className="container">
         <div className="checkout-grid">
-          {/* Configuratie */}
           <div className="checkout-config">
             <div className="checkout-block">
               <h2>1. Je pakket</h2>
@@ -111,61 +169,20 @@ export default function Checkout() {
             </div>
 
             <div className="checkout-block">
-              <h2>2. Voeg extra's toe</h2>
+              <h2>2. Voeg extra&apos;s toe</h2>
               <p className="sub" style={{ marginBottom: 20 }}>
-                Optioneel. Je kunt dit later ook nog aanpassen.
+                Optioneel. Bij mailboxen, gebruikers en pagina&apos;s kies je
+                zelf het aantal.
               </p>
 
               <h3 className="addon-sub">Doorlopend (per maand)</h3>
               <div className="addon-keuze">
-                {maandAddons.map((a) => (
-                  <label
-                    key={a.id}
-                    className={`addon-optie${
-                      gekozen.includes(a.id) ? " actief" : ""
-                    }`}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={gekozen.includes(a.id)}
-                      onChange={() => toggle(a.id)}
-                    />
-                    <span className="addon-optie-tekst">
-                      <span className="addon-optie-naam">{a.naam}</span>
-                      <span className="addon-optie-desc">{a.beschrijving}</span>
-                    </span>
-                    <span className="addon-optie-prijs">
-                      +{euro(a.bedrag ?? 0)}
-                      <small> p/mnd</small>
-                    </span>
-                  </label>
-                ))}
+                {maandAddons.map((a) => renderAddon(a, false))}
               </div>
 
               <h3 className="addon-sub">Eenmalig</h3>
               <div className="addon-keuze">
-                {eenmaligAddons.map((a) => (
-                  <label
-                    key={a.id}
-                    className={`addon-optie${
-                      gekozen.includes(a.id) ? " actief" : ""
-                    }`}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={gekozen.includes(a.id)}
-                      onChange={() => toggle(a.id)}
-                    />
-                    <span className="addon-optie-tekst">
-                      <span className="addon-optie-naam">{a.naam}</span>
-                      <span className="addon-optie-desc">{a.beschrijving}</span>
-                    </span>
-                    <span className="addon-optie-prijs">
-                      +{euro(a.bedrag ?? 0)}
-                      <small> eenmalig</small>
-                    </span>
-                  </label>
-                ))}
+                {eenmaligAddons.map((a) => renderAddon(a, true))}
               </div>
 
               <p className="checkout-offerte-note">
@@ -177,7 +194,6 @@ export default function Checkout() {
             </div>
           </div>
 
-          {/* Overzicht */}
           <aside className="checkout-summary">
             <div className="checkout-summary-card">
               <h2>Je bestelling</h2>
@@ -188,14 +204,15 @@ export default function Checkout() {
                   <span>Pakket {pakket.naam}</span>
                   <span>{euro(pakket.prijs)}</span>
                 </div>
-                {maandAddons
-                  .filter((a) => gekozen.includes(a.id))
-                  .map((a) => (
-                    <div className="sum-row" key={a.id}>
-                      <span>{a.naam}</span>
-                      <span>{euro(a.bedrag ?? 0)}</span>
-                    </div>
-                  ))}
+                {gekozenAddons(maandAddons).map((a) => (
+                  <div className="sum-row" key={a.id}>
+                    <span>
+                      {a.naam}
+                      {qty(a.id) > 1 ? ` × ${qty(a.id)}` : ""}
+                    </span>
+                    <span>{euro((a.bedrag ?? 0) * qty(a.id))}</span>
+                  </div>
+                ))}
                 <div className="sum-row sum-total">
                   <span>Per maand</span>
                   <span>{euro(maandTotaal)}</span>
@@ -208,14 +225,15 @@ export default function Checkout() {
                   <span>Opstartkosten</span>
                   <span>{euro(site.setupFee)}</span>
                 </div>
-                {eenmaligAddons
-                  .filter((a) => gekozen.includes(a.id))
-                  .map((a) => (
-                    <div className="sum-row" key={a.id}>
-                      <span>{a.naam}</span>
-                      <span>{euro(a.bedrag ?? 0)}</span>
-                    </div>
-                  ))}
+                {gekozenAddons(eenmaligAddons).map((a) => (
+                  <div className="sum-row" key={a.id}>
+                    <span>
+                      {a.naam}
+                      {qty(a.id) > 1 ? ` × ${qty(a.id)}` : ""}
+                    </span>
+                    <span>{euro((a.bedrag ?? 0) * qty(a.id))}</span>
+                  </div>
+                ))}
                 <div className="sum-row sum-total">
                   <span>Nu te betalen</span>
                   <span>{euro(eenmaligTotaal)}</span>

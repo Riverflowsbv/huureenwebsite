@@ -8,6 +8,7 @@ export type Addon = {
   // Voor het mandje/afrekenen:
   cartType: "maandelijks" | "eenmalig" | "offerte";
   bedrag?: number; // vast bedrag in euro's; ontbreekt bij "offerte"
+  perStuk?: boolean; // true = klant kan een aantal kiezen (bijv. 4 mailboxen)
 };
 
 export type AddonGroep = {
@@ -33,6 +34,7 @@ export const addonGroepen: AddonGroep[] = [
         eenheid: "p/mnd per gebruiker",
         cartType: "maandelijks",
         bedrag: 6.5,
+        perStuk: true,
         beschrijving:
           "Mail, agenda en opslag via Google Workspace of Microsoft 365, gekoppeld aan je domein. Wij regelen de installatie.",
       },
@@ -43,6 +45,7 @@ export const addonGroepen: AddonGroep[] = [
         eenheid: "p/mnd per mailbox",
         cartType: "maandelijks",
         bedrag: 2.5,
+        perStuk: true,
         beschrijving:
           "Een extra professioneel mailadres op je eigen domein, bijvoorbeeld voor een collega of een aparte afdeling.",
       },
@@ -63,6 +66,7 @@ export const addonGroepen: AddonGroep[] = [
         eenheid: "p/mnd per pagina",
         cartType: "maandelijks",
         bedrag: 7.5,
+        perStuk: true,
         beschrijving:
           "Je pakket heeft een maximaal aantal pagina's. Meer nodig? Voeg losse pagina's toe, per stuk.",
       },
