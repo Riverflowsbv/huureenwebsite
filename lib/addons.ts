@@ -27,16 +27,6 @@ export const addonGroepen: AddonGroep[] = [
       "Kleine uitbreidingen die je er direct bij kiest. Handig als je net iets meer wil dan je pakket standaard biedt.",
     items: [
       {
-        id: "extra-mailbox",
-        naam: "Extra mailbox",
-        prijs: "€2,50",
-        eenheid: "per maand",
-        cartType: "maandelijks",
-        bedrag: 2.5,
-        beschrijving:
-          "Een extra professioneel mailadres op je eigen domein, bijvoorbeeld voor een collega of een aparte afdeling.",
-      },
-      {
         id: "email-pakket",
         naam: "Professioneel e-mailpakket",
         prijs: "€6,50",
@@ -45,6 +35,16 @@ export const addonGroepen: AddonGroep[] = [
         bedrag: 6.5,
         beschrijving:
           "Mail, agenda en opslag via Google Workspace of Microsoft 365, gekoppeld aan je domein. Wij regelen de installatie.",
+      },
+      {
+        id: "extra-mailbox",
+        naam: "Extra mailbox",
+        prijs: "€2,50",
+        eenheid: "per maand",
+        cartType: "maandelijks",
+        bedrag: 2.5,
+        beschrijving:
+          "Een extra professioneel mailadres op je eigen domein, bijvoorbeeld voor een collega of een aparte afdeling.",
       },
       {
         id: "tweetalig",
