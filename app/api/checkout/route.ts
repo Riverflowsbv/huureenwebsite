@@ -34,9 +34,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Onbekend pakket." }, { status: 400 });
   }
 
-  // 21% btw automatisch laten berekenen door Stripe Tax. Zet STRIPE_TAX=false
-  // om dit tijdelijk uit te zetten (bijv. eerste test vóór Stripe Tax aan staat).
-  const belastingAan = process.env.STRIPE_TAX !== "false";
+  // 21% btw automatisch laten berekenen door Stripe Tax. Standaard UIT, zodat de
+  // checkout meteen werkt zonder dat Stripe Tax al is ingesteld. Zet STRIPE_TAX=true
+  // in Vercel zodra je Stripe Tax hebt geconfigureerd (btw-registratie NL).
+  const belastingAan = process.env.STRIPE_TAX === "true";
   const centen = (n: number) => Math.round(n * 100);
 
   const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
