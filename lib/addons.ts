@@ -29,25 +29,25 @@ export const addonGroepen: AddonGroep[] = [
     items: [
       {
         id: "email-pakket",
-        naam: "Professioneel e-mailpakket",
+        naam: "Compleet e-mailpakket (Workspace / 365)",
         prijs: "€6,50",
         eenheid: "p/mnd per gebruiker",
         cartType: "maandelijks",
         bedrag: 6.5,
         perStuk: true,
         beschrijving:
-          "Mail, agenda en opslag via Google Workspace of Microsoft 365, gekoppeld aan je domein. Wij regelen de installatie.",
+          "Meer dan alleen e-mail: een compleet werkaccount per persoon met e-mail, agenda, online opslag en de Google- of Office-apps, via Google Workspace of Microsoft 365. Wij regelen de installatie.",
       },
       {
         id: "extra-mailbox",
-        naam: "Extra mailbox",
+        naam: "Extra mailbox (alleen e-mail)",
         prijs: "€2,50",
         eenheid: "p/mnd per mailbox",
         cartType: "maandelijks",
         bedrag: 2.5,
         perStuk: true,
         beschrijving:
-          "Een extra professioneel mailadres op je eigen domein, bijvoorbeeld voor een collega of een aparte afdeling.",
+          "Een extra e-mailadres op je eigen domein om te versturen en ontvangen, bijvoorbeeld info@ of een adres voor een collega. Alleen e-mail, geen agenda of opslag.",
       },
       {
         id: "tweetalig",
@@ -103,10 +103,10 @@ export const addonGroepen: AddonGroep[] = [
       {
         id: "whatsapp",
         naam: "WhatsApp-knop",
-        prijs: "€89",
+        prijs: "€39",
         eenheid: "eenmalig",
         cartType: "eenmalig",
-        bedrag: 89,
+        bedrag: 39,
         beschrijving:
           "Een opvallende WhatsApp-knop op je website, zodat klanten je met één tik een berichtje sturen. Eenmalig ingesteld.",
       },
@@ -189,10 +189,10 @@ export const addonGroepen: AddonGroep[] = [
       {
         id: "support-10u",
         naam: "Supporttegoed: 10 uur per jaar",
-        prijs: "€77",
+        prijs: "€75",
         eenheid: "per maand",
         cartType: "maandelijks",
-        bedrag: 77,
+        bedrag: 75,
         beschrijving:
           "Een jaarlijks tegoed van 10 uur voor maatwerk, advies of grotere aanpassingen buiten je pakket.",
       },

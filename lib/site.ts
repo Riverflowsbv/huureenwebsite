@@ -83,7 +83,7 @@ export const pakketten: Pakket[] = [
         label: "Uitbreidbaar met",
         items: [
           { tekst: "Extra pagina's", status: "uitbreidbaar" },
-          { tekst: "Professioneel e-mailpakket", status: "uitbreidbaar" },
+          { tekst: "Compleet e-mailpakket", status: "uitbreidbaar" },
           { tekst: "SEO-abonnement", status: "uitbreidbaar" },
         ],
       },
