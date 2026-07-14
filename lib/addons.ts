@@ -71,13 +71,44 @@ export const addonGroepen: AddonGroep[] = [
           "Je pakket heeft een maximaal aantal pagina's. Meer nodig? Voeg losse pagina's toe, per stuk.",
       },
       {
+        id: "prioriteit-support",
+        naam: "Prioriteit-support",
+        prijs: "€19",
+        eenheid: "per maand",
+        cartType: "maandelijks",
+        bedrag: 19,
+        beschrijving:
+          "Reactie binnen 4 uur op werkdagen en voorrang bij aanpassingen. Zit al inbegrepen in Groei en Pro.",
+      },
+      {
+        id: "beheersysteem",
+        naam: "Simpel beheersysteem",
+        prijs: "€19",
+        eenheid: "per maand",
+        cartType: "maandelijks",
+        bedrag: 19,
+        beschrijving:
+          "Beheer zelf je teksten, prijzen en diensten, wanneer het jou uitkomt en zonder technische kennis.",
+      },
+      {
         id: "reserveringen",
         naam: "Online reserveringen",
-        prijs: "Op aanvraag",
-        eenheid: "",
-        cartType: "offerte",
+        prijs: "€25",
+        eenheid: "per maand",
+        cartType: "maandelijks",
+        bedrag: 25,
         beschrijving:
-          "Laat klanten zelf een afspraak of boeking inplannen, gekoppeld aan je agenda. De prijs hangt af van de gewenste koppeling.",
+          "Laat klanten zelf een afspraak of boeking inplannen, direct gekoppeld aan je agenda.",
+      },
+      {
+        id: "whatsapp",
+        naam: "WhatsApp-knop",
+        prijs: "€89",
+        eenheid: "eenmalig",
+        cartType: "eenmalig",
+        bedrag: 89,
+        beschrijving:
+          "Een opvallende WhatsApp-knop op je website, zodat klanten je met één tik een berichtje sturen. Eenmalig ingesteld.",
       },
       {
         id: "spoed",
@@ -93,9 +124,9 @@ export const addonGroepen: AddonGroep[] = [
   },
   {
     slug: "groeipakketten",
-    titel: "Doorlopende groeipakketten",
+    titel: "Doorlopende groei- en servicepakketten",
     intro:
-      "Wil je meer uit je website halen? Deze maandpakketten helpen je groeien. Net als je website: maandelijks opzegbaar na de minimale periode.",
+      "Wil je meer uit je website halen of volledig ontzorgd worden? Deze maandpakketten helpen je groeien. Net als je website: maandelijks opzegbaar na de minimale periode.",
     items: [
       {
         id: "seo",
@@ -106,6 +137,16 @@ export const addonGroepen: AddonGroep[] = [
         populair: true,
         beschrijving:
           "Structureel hoger in Google. Techniek, content en linkbuilding, met een heldere maandrapportage. Basis vanaf €149, uitgebreid €299.",
+      },
+      {
+        id: "lokale-seo",
+        naam: "Lokale SEO-campagne",
+        prijs: "€45",
+        eenheid: "per maand",
+        cartType: "maandelijks",
+        bedrag: 45,
+        beschrijving:
+          "Lokaal beter gevonden worden: optimalisatie van je Google Bedrijfsprofiel, lokale zoekwoorden, NAP-consistentie en een maandelijkse rapportage.",
       },
       {
         id: "content",
@@ -134,6 +175,26 @@ export const addonGroepen: AddonGroep[] = [
         cartType: "offerte",
         beschrijving:
           "Wij vullen en beheren je social kanalen, zodat je zichtbaar blijft zonder er zelf tijd in te steken.",
+      },
+      {
+        id: "support-5u",
+        naam: "Supporttegoed: 5 uur per jaar",
+        prijs: "€39",
+        eenheid: "per maand",
+        cartType: "maandelijks",
+        bedrag: 39,
+        beschrijving:
+          "Een jaarlijks tegoed van 5 uur voor maatwerk, advies of grotere aanpassingen buiten je pakket.",
+      },
+      {
+        id: "support-10u",
+        naam: "Supporttegoed: 10 uur per jaar",
+        prijs: "€77",
+        eenheid: "per maand",
+        cartType: "maandelijks",
+        bedrag: 77,
+        beschrijving:
+          "Een jaarlijks tegoed van 10 uur voor maatwerk, advies of grotere aanpassingen buiten je pakket.",
       },
     ],
   },

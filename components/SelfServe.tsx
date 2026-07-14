@@ -8,8 +8,8 @@ const punten = [
 ];
 
 export default function SelfServe({
-  titel = "Zelf aanpassen? Net zo makkelijk als een mailtje.",
-  sub = "Na livegang beheer je je website zelf via een gebruiksvriendelijk systeem, of je laat alles aan ons over. Jij kiest.",
+  titel = "Iets aanpassen? Net zo makkelijk als een mailtje.",
+  sub = "Kleine aanpassingen horen bij je pakket: één appje of mailtje en wij regelen het, meestal dezelfde dag nog. Jij hoeft niets technisch te doen.",
 }: {
   titel?: string;
   sub?: string;
@@ -22,8 +22,9 @@ export default function SelfServe({
             <h2>{titel}</h2>
             <p className="sub">{sub}</p>
             <p className="selfserve-note">
-              En wil je iets liever niet zelf doen? Eén appje of mailtje en wij
-              regelen het, meestal dezelfde dag nog.
+              Wil je liever zélf aan de knoppen, wanneer het jou uitkomt? Voeg
+              dan ons simpele beheersysteem toe en beheer teksten, foto&apos;s en
+              prijzen zelf.
             </p>
           </div>
           <ul className="selfserve-list">
