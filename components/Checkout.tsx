@@ -1,11 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { pakketten, site } from "@/lib/site";
 import { cartAddons } from "@/lib/addons";
-import { Check, Info, ArrowRight } from "@/components/icons";
+import { Check, Info, ArrowRight, Cross } from "@/components/icons";
 
 function euro(n: number) {
   return `€${n.toLocaleString("nl-NL", {
@@ -29,6 +29,19 @@ export default function Checkout() {
   const [status, setStatus] = useState<string | null>(null);
   const [bezig, setBezig] = useState(false);
   const [infoOpen, setInfoOpen] = useState<string | null>(null);
+
+  // Sluit de info-popover als je ergens buiten de geopende kaart klikt.
+  useEffect(() => {
+    if (!infoOpen) return;
+    const sluitBijBuitenklik = (e: PointerEvent) => {
+      const doel = e.target as HTMLElement | null;
+      if (doel?.closest(".pakket-optie-wrap.info-open")) return;
+      setInfoOpen(null);
+    };
+    document.addEventListener("pointerdown", sluitBijBuitenklik);
+    return () =>
+      document.removeEventListener("pointerdown", sluitBijBuitenklik);
+  }, [infoOpen]);
 
   const pakket = pakketten.find((p) => p.naam === pakketNaam)!;
   const maandAddons = cartAddons.filter((a) => a.cartType === "maandelijks");
@@ -192,6 +205,14 @@ export default function Checkout() {
                         role="region"
                         aria-label={`Inhoud pakket ${p.naam}`}
                       >
+                        <button
+                          type="button"
+                          className="pakket-info-close"
+                          aria-label="Sluiten"
+                          onClick={() => setInfoOpen(null)}
+                        >
+                          <Cross size={15} />
+                        </button>
                         <div className="pakket-info-pop-title">
                           Dit zit in {p.naam}
                         </div>

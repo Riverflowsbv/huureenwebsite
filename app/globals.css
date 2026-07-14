@@ -247,7 +247,9 @@ footer.site a:hover{color:#fff}
 @media(hover:hover){
   .pakket-info-btn:hover ~ .pakket-info-pop{opacity:1;visibility:visible;transform:none;pointer-events:auto}
 }
-.pakket-info-pop-title{font-weight:800;font-size:13px;color:var(--navy);margin-bottom:11px}
+.pakket-info-close{position:absolute;top:9px;right:9px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;color:#9aa3b8;cursor:pointer;border-radius:7px;transition:.15s}
+.pakket-info-close:hover{color:var(--navy);background:var(--bg)}
+.pakket-info-pop-title{font-weight:800;font-size:13px;color:var(--navy);margin-bottom:11px;padding-right:22px}
 .pakket-info-pop ul{list-style:none;display:grid;gap:8px;font-size:13.5px;color:var(--ink)}
 .pakket-info-pop ul li{display:flex;gap:8px;align-items:flex-start;line-height:1.4}
 .pakket-info-pop ul li .ic-check{margin-top:1px;color:var(--green);flex-shrink:0}
