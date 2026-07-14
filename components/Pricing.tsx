@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { pakketten, site } from "@/lib/site";
-import { Check } from "@/components/icons";
+import { Check, Cross } from "@/components/icons";
 
 export default function Pricing() {
   return (
@@ -27,13 +27,36 @@ export default function Pricing() {
                 <small> /maand excl. btw</small>
               </div>
               <div className="price-setup">+ eenmalig €{site.setupFee} opstartkosten</div>
-              <ul>
-                {p.features.map((f) => (
-                  <li key={f}>
-                    <Check className="ic-check" /> {f}
-                  </li>
+              <div className="plan-groups">
+                {p.groepen.map((g) => (
+                  <div className="plan-group" key={g.label}>
+                    <div className="plan-group-label">{g.label}</div>
+                    <ul>
+                      {g.items.map((item) => {
+                        const uitbreidbaar = item.status === "uitbreidbaar";
+                        return (
+                          <li
+                            key={item.tekst}
+                            className={`plan-feat${uitbreidbaar ? " uitbreidbaar" : ""}`}
+                          >
+                            {uitbreidbaar ? (
+                              <Cross className="ic-cross" size={17} />
+                            ) : (
+                              <Check className="ic-check" size={17} />
+                            )}
+                            <span className="plan-feat-text">
+                              {item.tekst}
+                              {item.detail && (
+                                <span className="plan-feat-detail">{item.detail}</span>
+                              )}
+                            </span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
                 ))}
-              </ul>
+              </div>
               <Link
                 href={`/afrekenen?pakket=${p.naam.toLowerCase()}`}
                 className={`btn ${p.populair ? "btn-primary" : "btn-ghost"}`}
