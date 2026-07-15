@@ -13,8 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function Portfolio() {
-  const featured = echteCases[0];
-  const overige = projecten.filter((p) => p !== featured);
+  const placeholders = projecten.filter((p) => !p.echt);
 
   return (
     <>
@@ -23,7 +22,7 @@ export default function Portfolio() {
           <h1>Ons werk</h1>
           <p className="lead">
             Elke website die we bouwen is maatwerk: snel, strak en gemaakt om
-            klanten op te leveren. Bekijk hieronder een echte live preview van
+            klanten op te leveren. Bekijk hieronder echte live previews van
             ons werk.
           </p>
         </div>
@@ -31,42 +30,45 @@ export default function Portfolio() {
 
       <section className="white">
         <div className="container">
-          {/* Uitgelichte case met echte live preview */}
-          {featured && (
-            <Link
-              href={`/portfolio/${featured.slug}`}
-              className="case-featured"
-              aria-label={`Bekijk de case van ${featured.naam}`}
-            >
-              <div className="case-featured-preview">
-                <SitePreview
-                  url={featured.liveUrl}
-                  naam={featured.naam}
-                  kleur={featured.kleur}
-                  accent={featured.accent}
-                />
-              </div>
-              <div
-                className="case-featured-info"
-                style={{
-                  background: `linear-gradient(150deg, ${featured.kleur}, ${featured.accent})`,
-                }}
+          {/* Echte cases, elk met een live preview */}
+          <div className="case-featured-list">
+            {echteCases.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/portfolio/${c.slug}`}
+                className="case-featured"
+                aria-label={`Bekijk de case van ${c.naam}`}
               >
-                <span className="case-featured-tag">
-                  <Check size={15} /> Uitgelichte case
-                </span>
-                <h2>{featured.naam}</h2>
-                <p className="case-featured-sector">
-                  {featured.type}
-                  {featured.plaats ? ` · ${featured.plaats}` : ""}
-                </p>
-                <p className="case-featured-kort">{featured.kort}</p>
-                <span className="case-featured-cta">
-                  Bekijk de volledige case <ArrowRight size={17} />
-                </span>
-              </div>
-            </Link>
-          )}
+                <div className="case-featured-preview">
+                  <SitePreview
+                    url={c.liveUrl}
+                    naam={c.naam}
+                    kleur={c.kleur}
+                    accent={c.accent}
+                  />
+                </div>
+                <div
+                  className="case-featured-info"
+                  style={{
+                    background: `linear-gradient(150deg, ${c.kleur}, ${c.accent})`,
+                  }}
+                >
+                  <span className="case-featured-tag">
+                    <Check size={15} /> Uitgelichte case
+                  </span>
+                  <h2>{c.naam}</h2>
+                  <p className="case-featured-sector">
+                    {c.type}
+                    {c.plaats ? ` · ${c.plaats}` : ""}
+                  </p>
+                  <p className="case-featured-kort">{c.kort}</p>
+                  <span className="case-featured-cta">
+                    Bekijk de volledige case <ArrowRight size={17} />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
 
           {/* Overige projecten */}
           <div className="portfolio-more">
@@ -77,7 +79,7 @@ export default function Portfolio() {
             </p>
           </div>
           <div className="soon-grid">
-            {overige.map((p, i) => (
+            {placeholders.map((p, i) => (
               <div
                 key={i}
                 className="soon-card"

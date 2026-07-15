@@ -48,15 +48,32 @@ export const projecten: Project[] = [
     ],
   },
   {
-    slug: "",
-    naam: "[Projectnaam 2]",
-    type: "Webshop · Maatwerk",
-    plaats: "",
-    sector: "",
-    kleur: "#12b981",
-    accent: "#0d9668",
-    kort: "Binnenkort: een nieuwe case.",
-    echt: false,
+    slug: "ninos-barber",
+    naam: "Nino's Barber",
+    type: "Bedrijfswebsite · Maatwerk",
+    plaats: "Amstelveen",
+    sector: "Barbershop & herenkapper",
+    kleur: "#1B1A18", // diep charcoal
+    accent: "#C99A3F", // warm goud
+    liveUrl: "https://www.ninosbarber.nl",
+    kort: "Een stoere, razendsnelle barbershop-site met fotogalerij en afspraken maken via WhatsApp.",
+    echt: true,
+    intro:
+      "Nino's Barber is een barbershop en herenkapper in Amstelveen, gespecialiseerd in strak knippen, fades en baardwerk. Nino wilde een website die net zo verzorgd oogt als zijn werk in de stoel, en waarmee klanten in een paar tikken een afspraak maken.",
+    uitdaging:
+      "Nino had nog geen eigen website en werd vooral gevonden via social media. Nieuwe klanten konden zijn werk, prijzen en openingstijden nergens rustig bekijken, en het maken van een afspraak verliep versnipperd. Er was behoefte aan één professionele plek die de sfeer van de shop uitstraalt en het boeken simpel maakt.",
+    aanpak:
+      "We ontwierpen een stoere, moderne huisstijl in diep charcoal met een warm goud accent, passend bij een barbershop. De site is mobiel-first en razendsnel, met een duidelijk overzicht van diensten en prijzen, een fotogalerij met zijn werk, klantreviews en de openingstijden. Afspraken maken gaat direct via een opvallende WhatsApp-knop, precies zoals Nino werkt.",
+    resultaat:
+      "Een strakke, snelle website die Nino's Barber professioneel neerzet en nieuwe klanten meteen laat zien wat ze kunnen verwachten. Vindbaar op lokale zoektermen in Amstelveen, met afspraken die vlot binnenkomen via WhatsApp.",
+    diensten: [
+      "Maatwerk ontwerp & huisstijl",
+      "Development (razendsnel)",
+      "Afspraken via WhatsApp",
+      "Fotogalerij",
+      "Lokale SEO",
+      "Hosting & onderhoud",
+    ],
   },
   {
     slug: "",

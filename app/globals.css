@@ -367,6 +367,7 @@ footer.site a:hover{color:#fff}
 .preview-note a{color:var(--blue);font-weight:700;display:inline-flex;align-items:center;gap:5px}
 
 /* Uitgelichte case */
+.case-featured-list{display:grid;gap:34px}
 .case-featured{display:grid;grid-template-columns:1.35fr 1fr;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#fff;box-shadow:var(--shadow);transition:transform .25s ease,box-shadow .25s ease}
 .case-featured:hover{transform:translateY(-4px);box-shadow:0 22px 60px rgba(14,27,61,.16)}
 .case-featured-preview{padding:34px;background:var(--bg);display:flex;align-items:center}
