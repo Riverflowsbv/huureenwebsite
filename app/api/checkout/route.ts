@@ -129,10 +129,7 @@ export async function POST(request: Request) {
   } catch (err) {
     console.error("Stripe checkout error:", err);
     return NextResponse.json(
-      {
-        error: "De betaalsessie kon niet worden gestart. Probeer het later opnieuw.",
-        detail: err instanceof Error ? err.message : String(err),
-      },
+      { error: "De betaalsessie kon niet worden gestart. Probeer het later opnieuw." },
       { status: 500 }
     );
   }
