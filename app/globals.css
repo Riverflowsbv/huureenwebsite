@@ -208,6 +208,7 @@ footer.site a:hover{color:#fff}
 /* Footer-kolommen: op desktop gewone kolommen, op mobiel inklapbaar (accordeon) */
 .foot-col{min-width:0}
 .foot-col ul{margin:0}
+.foot-col-mob{display:none}
 .foot-h{color:#fff;font-size:15px;margin-bottom:18px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;list-style:none;display:flex;align-items:center;justify-content:space-between;cursor:default}
 .foot-h::-webkit-details-marker{display:none}
 .foot-h::after{content:"";flex-shrink:0;width:8px;height:8px;border-right:2px solid rgba(255,255,255,.45);border-bottom:2px solid rgba(255,255,255,.45);transform:rotate(45deg);transition:transform .2s ease;display:none}
@@ -488,6 +489,8 @@ a,button{-webkit-tap-highlight-color:transparent}
   .steps,.plans,.reviews-grid,.cards{grid-template-columns:1fr}
   .compare-card{grid-template-columns:1fr;padding:40px 28px}
   .foot-grid{grid-template-columns:1fr;gap:0}
+  .foot-col-desk{display:none}
+  .foot-col-mob{display:block}
   .foot-col{border-top:1px solid rgba(255,255,255,.1)}
   .foot-h{cursor:pointer;margin-bottom:0;padding:16px 0}
   .foot-h::after{display:block}

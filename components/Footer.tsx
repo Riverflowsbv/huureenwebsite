@@ -3,6 +3,58 @@ import { site } from "@/lib/site";
 import { steden } from "@/lib/steden";
 import { ArrowRight } from "@/components/icons";
 
+// Kolominhoud één keer definiëren, zodat desktop en mobiel exact hetzelfde tonen.
+function DienstenLinks() {
+  return (
+    <ul>
+      <li><Link href="/website-huren">Website huren</Link></li>
+      <li><Link href="/website-vanaf-199">Website vanaf €199</Link></li>
+      <li><Link href="/website-laten-maken">Website laten maken</Link></li>
+      <li><Link href="/hosting-en-onderhoud">Hosting &amp; onderhoud</Link></li>
+      <li><Link href="/seo">SEO-optimalisatie</Link></li>
+      <li><Link href="/aanvullende-diensten">Aanvullende diensten</Link></li>
+      <li><Link href="/portfolio">Portfolio</Link></li>
+      <li><Link href="/blog">Blog</Link></li>
+    </ul>
+  );
+}
+
+function WerkgebiedLinks() {
+  return (
+    <ul>
+      {steden.slice(0, 6).map((s) => (
+        <li key={s.slug}>
+          <Link href={`/website-laten-maken/${s.slug}`}>
+            Website laten maken {s.naam}
+          </Link>
+        </li>
+      ))}
+      <li>
+        <Link href="/website-laten-maken" className="foot-link-arrow">
+          Heel Nederland <ArrowRight size={15} />
+        </Link>
+      </li>
+    </ul>
+  );
+}
+
+function ContactLinks() {
+  return (
+    <ul>
+      <li>{site.adres}</li>
+      <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+      <li><a href={site.telefoonLink}>{site.telefoon}</a></li>
+      <li><Link href="/contact">Plan een gesprek</Link></li>
+    </ul>
+  );
+}
+
+const kolommen = [
+  { titel: "Diensten", inhoud: <DienstenLinks /> },
+  { titel: "Werkgebied", inhoud: <WerkgebiedLinks /> },
+  { titel: "Contact", inhoud: <ContactLinks /> },
+];
+
 export default function Footer() {
   return (
     <footer className="site">
@@ -17,45 +69,22 @@ export default function Footer() {
               van {site.bv}
             </p>
           </div>
-          <details className="foot-col">
-            <summary className="foot-h">Diensten</summary>
-            <ul>
-              <li><Link href="/website-huren">Website huren</Link></li>
-              <li><Link href="/website-vanaf-199">Website vanaf €199</Link></li>
-              <li><Link href="/website-laten-maken">Website laten maken</Link></li>
-              <li><Link href="/hosting-en-onderhoud">Hosting &amp; onderhoud</Link></li>
-              <li><Link href="/seo">SEO-optimalisatie</Link></li>
-              <li><Link href="/aanvullende-diensten">Aanvullende diensten</Link></li>
-              <li><Link href="/portfolio">Portfolio</Link></li>
-              <li><Link href="/blog">Blog</Link></li>
-            </ul>
-          </details>
-          <details className="foot-col">
-            <summary className="foot-h">Werkgebied</summary>
-            <ul>
-              {steden.slice(0, 6).map((s) => (
-                <li key={s.slug}>
-                  <Link href={`/website-laten-maken/${s.slug}`}>
-                    Website laten maken {s.naam}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link href="/website-laten-maken" className="foot-link-arrow">
-                  Heel Nederland <ArrowRight size={15} />
-                </Link>
-              </li>
-            </ul>
-          </details>
-          <details className="foot-col">
-            <summary className="foot-h">Contact</summary>
-            <ul>
-              <li>{site.adres}</li>
-              <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
-              <li><a href={site.telefoonLink}>{site.telefoon}</a></li>
-              <li><Link href="/contact">Plan een gesprek</Link></li>
-            </ul>
-          </details>
+
+          {/* Desktop: gewoon uitgeklapt (geen <details>, dus geen Chrome-bug). */}
+          {kolommen.map((k) => (
+            <div className="foot-col foot-col-desk" key={k.titel}>
+              <div className="foot-h">{k.titel}</div>
+              {k.inhoud}
+            </div>
+          ))}
+
+          {/* Mobiel: inklapbaar zodat de footer niet te lang wordt. */}
+          {kolommen.map((k) => (
+            <details className="foot-col foot-col-mob" key={k.titel}>
+              <summary className="foot-h">{k.titel}</summary>
+              {k.inhoud}
+            </details>
+          ))}
         </div>
         <div className="foot-bottom">
           <span>© {new Date().getFullYear()} {site.naam} · {site.bv}</span>
