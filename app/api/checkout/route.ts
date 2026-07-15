@@ -93,13 +93,9 @@ export async function POST(request: Request) {
   const origin = request.headers.get("origin") ?? site.url;
   const stripe = new Stripe(key);
 
-  // De maandelijkse incasso start pas na 2 weken. De opstartkosten en eenmalige
-  // extra's worden wél direct betaald (via iDEAL, waarmee meteen de SEPA-
-  // machtiging wordt gezet). billing_cycle_anchor in de toekomst +
-  // proration_behavior "none" = geen kosten voor de periode tot de eerste incasso.
+  // De maandelijkse incasso start pas na 2 weken (proefperiode op het abonnement).
+  // De opstartkosten en eenmalige extra's worden wél direct betaald.
   const INCASSO_START_DAGEN = 14;
-  const incassoStart =
-    Math.floor(Date.now() / 1000) + INCASSO_START_DAGEN * 24 * 60 * 60;
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -112,8 +108,7 @@ export async function POST(request: Request) {
       locale: "nl",
       automatic_tax: { enabled: belastingAan },
       subscription_data: {
-        billing_cycle_anchor: incassoStart,
-        proration_behavior: "none",
+        trial_period_days: INCASSO_START_DAGEN,
         metadata: {
           merk: "huureenwebsite",
           pakket: pakket.naam,
