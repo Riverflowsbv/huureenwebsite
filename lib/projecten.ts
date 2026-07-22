@@ -76,15 +76,33 @@ export const projecten: Project[] = [
     ],
   },
   {
-    slug: "",
-    naam: "[Projectnaam 3]",
-    type: "Website · Huur",
-    plaats: "",
-    sector: "",
-    kleur: "#f5a623",
-    accent: "#d98c0a",
-    kort: "Binnenkort: een nieuwe case.",
-    echt: false,
+    slug: "chiropractie-ceintuurbaan",
+    naam: "Chiropractie Ceintuurbaan",
+    type: "Praktijkwebsite · Maatwerk",
+    plaats: "Amsterdam",
+    sector: "Chiropractie & gezondheidszorg",
+    kleur: "#0E7C86", // rustig teal
+    accent: "#16824F", // helend groen
+    // Tijdelijke Vercel-URL van de nieuwe site; wordt chiropractieceintuurbaan.nl zodra het domein overgaat.
+    liveUrl: "https://chiropractor-five.vercel.app",
+    kort: "Een rustige, vertrouwenwekkende praktijksite met online afspraken en heldere info per klacht.",
+    echt: true,
+    intro:
+      "Chiropractie Ceintuurbaan is een chiropractiepraktijk in hartje De Pijp in Amsterdam. De praktijk wilde een frisse, professionele website die het vakmanschap en de evidence-based aanpak laat zien, en waarmee patiënten eenvoudig online een afspraak maken.",
+    uitdaging:
+      "De bestaande website was verouderd: gedateerd design, dubbele content en al jaren niet meer bijgewerkt. Voor een zorgpraktijk waar vertrouwen alles is, deed dat afbreuk aan de professionele indruk. Bezoekers konden lastig terugvinden met welke klachten ze terecht kunnen, wat de behandeling inhoudt en wat de tarieven zijn.",
+    aanpak:
+      "We ontwierpen een rustige, klinische maar warme huisstijl die vertrouwen uitstraalt: veel witruimte, rustgevende kleuren en ruime, goed leesbare typografie voor een bredere doelgroep. De site is mobiel-first en snel, met heldere pagina's per klacht, uitleg over de behandelmethoden (waaronder de Cox-decompressietechniek), transparante tarieven en de kwaliteitswaarborg. Online afspraken maken gaat direct via het bestaande boekingssysteem.",
+    resultaat:
+      "Een verzorgde, snelle praktijkwebsite die Chiropractie Ceintuurbaan professioneel neerzet en patiënten vertrouwen geeft. Beter vindbaar op lokale zoektermen in Amsterdam, met een duidelijke route naar het maken van een afspraak.",
+    diensten: [
+      "Maatwerk ontwerp & huisstijl",
+      "Development (razendsnel)",
+      "Online afspraken maken",
+      "Pagina's per klacht (SEO)",
+      "Lokale SEO",
+      "Hosting & onderhoud",
+    ],
   },
   {
     slug: "",
